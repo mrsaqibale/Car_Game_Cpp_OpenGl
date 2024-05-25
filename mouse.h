@@ -1,5 +1,9 @@
-#ifndef D144DA1A_AA3B_4C94_AC65_D113BF1D5B11
-#define D144DA1A_AA3B_4C94_AC65_D113BF1D5B11
+// by  mrsaqibale
+#ifndef MOUSE_H
+#define MOUSE_H
+class Mouse{
+    public:
 
+};
 
-#endif /* D144DA1A_AA3B_4C94_AC65_D113BF1D5B11 */
+#endif 

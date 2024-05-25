@@ -1,5 +1,9 @@
-#ifndef C9F2D764_19D9_4601_90EC_BC198B14EC4B
-#define C9F2D764_19D9_4601_90EC_BC198B14EC4B
+// by  mrsaqibale
+#ifndef RESIZE_H
+#define RESIZE_H
+class Resize{
+    public:
 
+};
 
-#endif /* C9F2D764_19D9_4601_90EC_BC198B14EC4B */
+#endif 
