@@ -1,5 +1,9 @@
-#ifndef C636D69B_03C4_42C6_9A2C_0663FAAFB713
-#define C636D69B_03C4_42C6_9A2C_0663FAAFB713
+// by  mrsaqibale
+#ifndef DISPLAY_H
+#define DISPLAY_H
+class Display{
+    public:
 
+};
 
-#endif /* C636D69B_03C4_42C6_9A2C_0663FAAFB713 */
+#endif 
