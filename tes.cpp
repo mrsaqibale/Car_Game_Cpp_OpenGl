@@ -30,20 +30,63 @@ void drawCar(float x, float y, bool isRed) {
     glEnd();
 }
 
+void drawTree(float x, float y) {
+    // Draw the trunk
+    glColor3f(0.55f, 0.27f, 0.07f); // Dark brown
+    glBegin(GL_QUADS);
+    glVertex2f(x - 0.02f, y - 0.1f);
+    glVertex2f(x + 0.02f, y - 0.1f);
+    glVertex2f(x + 0.02f, y);
+    glVertex2f(x - 0.02f, y);
+    glEnd();
+
+    // Draw the leaves
+    glColor3f(0.0f, 1.0f, 0.0f); // Green
+    glBegin(GL_TRIANGLES);
+    glVertex2f(x - 0.07f, y);
+    glVertex2f(x + 0.07f, y);
+    glVertex2f(x, y + 0.1f);
+    glEnd();
+
+    glBegin(GL_TRIANGLES);
+    glVertex2f(x - 0.05f, y + 0.05f);
+    glVertex2f(x + 0.05f, y + 0.05f);
+    glVertex2f(x, y + 0.15f);
+    glEnd();
+}
+
 void drawRoad() {
-    glColor3f(0.5f, 0.5f, 0.5f);
+    // Draw grass
+    glColor3f(0.0f, 0.5f, 0.0f); // Dark green
     glBegin(GL_QUADS);
     glVertex2f(-1.0f, -1.0f);
-    glVertex2f(1.0f, -1.0f);
-    glVertex2f(1.0f, 1.0f);
+    glVertex2f(-0.8f, -1.0f);
+    glVertex2f(-0.8f, 1.0f);
     glVertex2f(-1.0f, 1.0f);
     glEnd();
 
+    glBegin(GL_QUADS);
+    glVertex2f(0.8f, -1.0f);
+    glVertex2f(1.0f, -1.0f);
+    glVertex2f(1.0f, 1.0f);
+    glVertex2f(0.8f, 1.0f);
+    glEnd();
+
+    // Draw road
+    glColor3f(0.2f, 0.2f, 0.2f); // Dark grey
+    glBegin(GL_QUADS);
+    glVertex2f(-0.8f, -1.0f);
+    glVertex2f(0.8f, -1.0f);
+    glVertex2f(0.8f, 1.0f);
+    glVertex2f(-0.8f, 1.0f);
+    glEnd();
+
+    // Draw road lines
     glColor3f(1.0f, 1.0f, 1.0f);
-    for (int i = -1; i <= 1; i++) {
+    for (int i = -1; i <= 2; i++) {
         glBegin(GL_LINES);
-        glVertex2f(i * 0.8f, -1.0f);
-        glVertex2f(i * 0.8f, 1.0f);
+        glVertex2f(i * 0.4f - 0.4f, -1.0f);
+        glVertex2f(i * 0.4f - 0.4f, 1.0f);
         glEnd();
     }
 }
@@ -83,6 +126,12 @@ void display() {
             drawCar(car.posX, car.posY, false);
         }
 
+        // Draw trees on the sides of the road
+        for (float y = -0.9f; y <= 1.0f; y += 0.4f) {
+            drawTree(-0.9f, y);
+            drawTree(0.9f, y);
+        }
+
         // Display score
         glColor3f(1.0f, 1.0f, 1.0f);
         glRasterPos2f(0.7f, 0.9f);
@@ -101,9 +150,9 @@ void update(int value) {
             car.posY -= 0.02f;
             if (car.posY < -1.0f) {
                 score++;
-                car.posY = 1.0f + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(1.0f)));
+                car.posY = 1.0f + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (1.0f)));
                 car.lane = rand() % 3;
-                car.posX = -0.6f + car.lane * 0.6f;
+                car.posX = -0.4f + car.lane * 0.4f;
             }
 
             if (car.lane == lane && car.posY < carPosY + 0.1f && car.posY > carPosY - 0.1f) {
@@ -119,10 +168,10 @@ void specialInput(int key, int x, int y) {
     if (!gameOver) {
         if (key == GLUT_KEY_LEFT && lane > 0) {
             lane--;
-            carPosX -= 0.6f;
+            carPosX -= 0.4f;
         } else if (key == GLUT_KEY_RIGHT && lane < 2) {
             lane++;
-            carPosX += 0.6f;
+            carPosX += 0.4f;
         } else if (key == GLUT_KEY_UP && carPosY < 0.9f) {
             carPosY += 0.1f;
         } else if (key == GLUT_KEY_DOWN && carPosY > -0.9f) {
@@ -139,9 +188,9 @@ void keyboard(unsigned char key, int x, int y) {
             carPosX = 0.0f;
             carPosY = -0.8f;
             otherCars.clear();
-            otherCars.push_back({ -0.6f, 1.0f, 0 });
+            otherCars.push_back({ -0.4f, 1.0f, 0 });
             otherCars.push_back({ 0.0f, 1.5f, 1 });
-            otherCars.push_back({ 0.6f, 2.0f, 2 });
+            otherCars.push_back({ 0.4f, 2.0f, 2 });
             glutPostRedisplay();
             glutTimerFunc(50, update, 0);
         } else if (key == 27) { // ASCII value for Escape key
@@ -152,9 +201,9 @@ void keyboard(unsigned char key, int x, int y) {
 
 int main(int argc, char** argv) {
     srand(time(NULL));
-    otherCars.push_back({ -0.6f, 1.0f, 0 });
+    otherCars.push_back({ -0.4f, 1.0f, 0 });
     otherCars.push_back({ 0.0f, 1.5f, 1 });
-    otherCars.push_back({ 0.6f, 2.0f, 2 });
+    otherCars.push_back({ 0.4f, 2.0f, 2 });
 
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
