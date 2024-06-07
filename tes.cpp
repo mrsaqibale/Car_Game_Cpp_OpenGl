@@ -60,35 +60,38 @@ void drawRoad() {
     glColor3f(0.0f, 0.5f, 0.0f); // Dark green
     glBegin(GL_QUADS);
     glVertex2f(-1.0f, -1.0f);
-    glVertex2f(-0.8f, -1.0f);
-    glVertex2f(-0.8f, 1.0f);
+    glVertex2f(-0.6f, -1.0f);
+    glVertex2f(-0.6f, 1.0f);
     glVertex2f(-1.0f, 1.0f);
     glEnd();
 
     glBegin(GL_QUADS);
-    glVertex2f(0.8f, -1.0f);
+    glVertex2f(0.6f, -1.0f);
     glVertex2f(1.0f, -1.0f);
     glVertex2f(1.0f, 1.0f);
-    glVertex2f(0.8f, 1.0f);
+    glVertex2f(0.6f, 1.0f);
     glEnd();
 
     // Draw road
     glColor3f(0.2f, 0.2f, 0.2f); // Dark grey
     glBegin(GL_QUADS);
-    glVertex2f(-0.8f, -1.0f);
-    glVertex2f(0.8f, -1.0f);
-    glVertex2f(0.8f, 1.0f);
-    glVertex2f(-0.8f, 1.0f);
+    glVertex2f(-0.6f, -1.0f);
+    glVertex2f(0.6f, -1.0f);
+    glVertex2f(0.6f, 1.0f);
+    glVertex2f(-0.6f, 1.0f);
     glEnd();
 
     // Draw road lines
+    glLineWidth(10);
     glColor3f(1.0f, 1.0f, 1.0f);
-    for (int i = -1; i <= 2; i++) {
-        glBegin(GL_LINES);
-        glVertex2f(i * 0.4f - 0.4f, -1.0f);
-        glVertex2f(i * 0.4f - 0.4f, 1.0f);
-        glEnd();
+    glBegin(GL_LINES);
+    for (float i = -1.0f; i <= 1.0f; i += 0.2f) {
+        glVertex2f(-0.2f, i);
+        glVertex2f(-0.2f, i + 0.1f);
+        glVertex2f(0.2f, i);
+        glVertex2f(0.2f, i + 0.1f);
     }
+        glEnd();
 }
 
 void display() {
@@ -128,8 +131,8 @@ void display() {
 
         // Draw trees on the sides of the road
         for (float y = -0.9f; y <= 1.0f; y += 0.4f) {
-            drawTree(-0.9f, y);
-            drawTree(0.9f, y);
+            drawTree(-0.8f, y);
+            drawTree(0.8f, y);
         }
 
         // Display score

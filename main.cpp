@@ -2,33 +2,36 @@
 #include <GL/glut.h>
 #include <GL/gl.h>
 #include "display.h"
+#include "input.h"
 
 // write display function calls
 void display(){
     Display obj;
     obj.display();
 }
-int main(int argc, char* argv[])
-{
-    // Initialize glut function 
+// write keyboar function calls
+// void keyboard(){
+//     Input obj;
+//     obj.input();
+// }
+int main(int argc, char** argv) {
+    // srand(time(NULL));
+    // otherCars.push_back({ -0.4f, 1.0f, 0 });
+    // otherCars.push_back({ 0.0f, 1.5f, 1 });
+    // otherCars.push_back({ 0.4f, 2.0f, 2 });
+
     glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+    glutInitWindowSize(800, 600);
+    glutCreateWindow("Car Game");
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-    //Set window size and display
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-    glutInitWindowSize(1200, 900);
-    glutInitWindowPosition(50,50);
-    glutCreateWindow("Play Ground");
-
-    //set the background color
-    glClearColor(0.7,0.2,0.4,0.0);
-    gluOrtho2D(-1.0,1.0,-1.0,1.0);
-    //Register Display Function
     glutDisplayFunc(display);
-
-    //main loop
+    // glutTimerFunc(50, update, 0);
+    // glutSpecialFunc(specialInput);
+    // glutKeyboardFunc(keyboard);
+    
     glutMainLoop();
-
-    //return
     return 0;
 }
 // g++ -o outputs/final 01PlayGround.cpp  display.cpp -lGL -lGLU -lglut
