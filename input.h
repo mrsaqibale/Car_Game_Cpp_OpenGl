@@ -3,7 +3,8 @@
 #define INPUT_H
 class Input{
     public:
-
+    
+    
 };
 
 #endif 
