@@ -3,6 +3,11 @@
 #define DISPLAY_H
 class Display{
     public:
+    void display();
+    void drawCar(float, float , bool);
+    void drawTree(float, float);
+    void drawRoad();
+
 
 };
 

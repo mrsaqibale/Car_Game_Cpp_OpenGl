@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Compile the C++ program
-g++ s.cpp -lglut -lGL -lGLU
+g++ 2.cpp -lglut -lGL -lGLU
 
 # Check if the compilation was successful
 if [ $? -eq 0 ]; then
